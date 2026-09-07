@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage dashboard users">
+    <title>Enterprise Dashboard | Users</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+
+    <div class="header-brand">
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-controls="sidebar"
+            aria-expanded="false">
+            <span aria-hidden="true">☰</span>
+            <span class="sr-only">Toggle navigation menu</span>
+        </button>
+
+        <a class="brand-link" href="index.html">
+            Enterprise Dashboard
+        </a>
+    </div>
+
+    <nav class="top-navigation" aria-label="Primary navigation">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="users.html" aria-current="page">Users</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-actions">
+        <button
+            class="notification-button"
+            type="button"
+            aria-label="Notifications">
+            🔔
+        </button>
+        <span class="user-name">Admin User</span>
+    </div>
+
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+        <nav aria-label="Sidebar navigation">
+
+            <h2 class="sidebar-title">Menu</h2>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <a href="index.html">
+                        <span aria-hidden="true">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="users.html" aria-current="page">
+                        <span aria-hidden="true">👥</span>
+                        Users
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        <span aria-hidden="true">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a href="settings.html">
+                        <span aria-hidden="true">⚙</span>
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="main-content" class="main-content">
+
+        <section class="page-heading" aria-labelledby="page-title">
+
+            <div>
+                <p class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span aria-hidden="true">/</span>
+                    Users
+                </p>
+
+                <h1 id="page-title">User Management</h1>
+
+                <p>
+                    Manage users and their account permissions.
+                </p>
+            </div>
+
+            <button
+                class="primary-button"
+                id="openUserModal"
+                type="button">
+                Add User
+            </button>
+
+        </section>
+
+        <section class="panel" aria-labelledby="users-heading">
+
+            <header class="panel-header">
+                <div>
+                    <h2 id="users-heading">All Users</h2>
+                    <p>Currently registered dashboard users.</p>
+                </div>
+            </header>
+
+            <div class="filter-form">
+
+                <form>
+
+                    <div class="form-group">
+                        <label for="userSearch">
+                            Search users
+                        </label>
+
+                        <input
+                            id="userSearch"
+                            name="userSearch"
+                            type="search"
+                            placeholder="Search by name or email"
+                            autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roleFilter">
+                            Filter by role
+                        </label>
+
+                        <select id="roleFilter" name="roleFilter">
+                            <option value="all">All roles</option>
+                            <option value="admin">Administrator</option>
+                            <option value="manager">Manager</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="table-container">
+
+                <table id="usersTable">
+
+                    <caption class="sr-only">
+                        Registered users and their account information
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Joined</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Rahul Sharma</td>
+                            <td>rahul@example.com</td>
+                            <td>Administrator</td>
+                            <td>
+                                <span class="status status-success">
+                                    Active
+                                </span>
+                            </td>
+                            <td>12 Jan 2026</td>
+                            <td>
+                                <button
+                                    class="table-button"
+                                    type="button"
+                                    aria-label="Edit Rahul Sharma">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Priya Kumar</td>
+                            <td>priya@example.com</td>
+                            <td>Manager</td>
+                            <td>
+                                <span class="status status-success">
+                                    Active
+                                </span>
+                            </td>
+                            <td>04 Feb 2026</td>
+                            <td>
+                                <button
+                                    class="table-button"
+                                    type="button"
+                                    aria-label="Edit Priya Kumar">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Arjun Rao</td>
+                            <td>arjun@example.com</td>
+                            <td>User</td>
+                            <td>
+                                <span class="status status-pending">
+                                    Pending
+                                </span>
+                            </td>
+                            <td>15 Mar 2026</td>
+                            <td>
+                                <button
+                                    class="table-button"
+                                    type="button"
+                                    aria-label="Edit Arjun Rao">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Ananya Singh</td>
+                            <td>ananya@example.com</td>
+                            <td>User</td>
+                            <td>
+                                <span class="status status-success">
+                                    Active
+                                </span>
+                            </td>
+                            <td>21 Apr 2026</td>
+                            <td>
+                                <button
+                                    class="table-button"
+                                    type="button"
+                                    aria-label="Edit Ananya Singh">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<footer class="site-footer">
+
+    <p>
+        &copy; 2026 Enterprise Dashboard.
+    </p>
+
+    <nav aria-label="Footer navigation">
+        <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+    </nav>
+
+</footer>
+
+<dialog class="modal" id="userModal" aria-labelledby="userModalTitle">
+
+    <div class="modal-content">
+
+        <header class="modal-header">
+            <h2 id="userModalTitle">Add User</h2>
+
+            <button
+                class="close-button"
+                id="closeUserModal"
+                type="button"
+                aria-label="Close add user dialog">
+                ×
+            </button>
+        </header>
+
+        <form id="userForm">
+
+            <fieldset>
+                <legend>User information</legend>
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full name
+                    </label>
+
+                    <input
+                        id="fullName"
+                        name="fullName"
+                        type="text"
+                        required
+                        minlength="2"
+                        autocomplete="name">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email address
+                    </label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        autocomplete="email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="userRole">
+                        Role
+                    </label>
+
+                    <select
+                        id="userRole"
+                        name="userRole"
+                        required>
+
+                        <option value="">Select a role</option>
+                        <option value="admin">Administrator</option>
+                        <option value="manager">Manager</option>
+                        <option value="user">User</option>
+
+                    </select>
+
+                </div>
+
+            </fieldset>
+
+            <div class="form-actions">
+
+                <button
+                    class="secondary-button"
+                    id="cancelUserModal"
+                    type="button">
+                    Cancel
+                </button>
+
+                <button
+                    class="primary-button"
+                    type="submit">
+                    Create user
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</dialog>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
+

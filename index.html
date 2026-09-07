@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessible enterprise dashboard">
+    <title>Enterprise Dashboard | Overview</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+    <div class="header-brand">
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-controls="sidebar"
+            aria-expanded="false">
+            <span aria-hidden="true">☰</span>
+            <span class="sr-only">Toggle navigation menu</span>
+        </button>
+
+        <a class="brand-link" href="index.html">
+            Enterprise Dashboard
+        </a>
+    </div>
+
+    <nav class="top-navigation" aria-label="Primary navigation">
+        <ul>
+            <li><a href="index.html" aria-current="page">Dashboard</a></li>
+            <li><a href="users.html">Users</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-actions">
+        <button
+            class="notification-button"
+            type="button"
+            aria-label="Notifications">
+            <span aria-hidden="true">🔔</span>
+        </button>
+
+        <span class="user-name">Admin User</span>
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+        <nav aria-label="Sidebar navigation">
+            <h2 class="sidebar-title">Menu</h2>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index.html" aria-current="page">
+                        <span aria-hidden="true">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="users.html">
+                        <span aria-hidden="true">👥</span>
+                        Users
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        <span aria-hidden="true">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a href="settings.html">
+                        <span aria-hidden="true">⚙</span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="main-content" class="main-content">
+
+        <section class="page-heading" aria-labelledby="page-title">
+            <div>
+                <p class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span aria-hidden="true">/</span>
+                    Dashboard
+                </p>
+
+                <h1 id="page-title">Dashboard Overview</h1>
+                <p>
+                    Monitor your organization's performance and activity.
+                </p>
+            </div>
+
+            <button class="primary-button" id="openModalButton" type="button">
+                Add Activity
+            </button>
+        </section>
+
+        <section aria-labelledby="statistics-heading">
+            <h2 id="statistics-heading" class="section-title">
+                Key statistics
+            </h2>
+
+            <div class="statistics-grid">
+
+                <article class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-number">12,480</p>
+                    <p class="stat-positive">+8.2% from last month</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Active Projects</h3>
+                    <p class="stat-number">248</p>
+                    <p class="stat-positive">+12 new projects</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Completed Tasks</h3>
+                    <p class="stat-number">8,942</p>
+                    <p class="stat-positive">+15.4% this month</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Pending Requests</h3>
+                    <p class="stat-number">86</p>
+                    <p class="stat-warning">Requires attention</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="content-grid" aria-label="Dashboard information">
+
+            <article class="panel">
+                <header class="panel-header">
+                    <div>
+                        <h2>Recent Activity</h2>
+                        <p>Latest activity from your organization.</p>
+                    </div>
+
+                    <a href="reports.html">View all</a>
+                </header>
+
+                <div class="table-container">
+                    <table>
+                        <caption class="sr-only">
+                            Recent organization activity
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Activity</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Project created</td>
+                                <td>Rahul Sharma</td>
+                                <td>07 Sep 2026</td>
+                                <td>
+                                    <span class="status status-success">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Report generated</td>
+                                <td>Priya Kumar</td>
+                                <td>07 Sep 2026</td>
+                                <td>
+                                    <span class="status status-success">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>User invitation</td>
+                                <td>Arjun Rao</td>
+                                <td>06 Sep 2026</td>
+                                <td>
+                                    <span class="status status-pending">
+                                        Pending
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Data export</td>
+                                <td>Ananya Singh</td>
+                                <td>06 Sep 2026</td>
+                                <td>
+                                    <span class="status status-success">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <aside class="panel">
+                <header class="panel-header">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Common administrative tasks.</p>
+                    </div>
+                </header>
+
+                <ul class="quick-actions">
+                    <li>
+                        <button type="button" id="quickAddUser">
+                            Add a new user
+                        </button>
+                    </li>
+                    <li>
+                        <a href="reports.html">Generate report</a>
+                    </li>
+                    <li>
+                        <a href="settings.html">Update settings</a>
+                    </li>
+                </ul>
+            </aside>
+
+        </section>
+
+    </main>
+</div>
+
+<footer class="site-footer">
+    <p>
+        &copy; 2026 Enterprise Dashboard. All rights reserved.
+    </p>
+
+    <nav aria-label="Footer navigation">
+        <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+    </nav>
+</footer>
+
+<dialog
+    class="modal"
+    id="activityModal"
+    aria-labelledby="modal-title">
+
+    <div class="modal-content">
+
+        <header class="modal-header">
+            <h2 id="modal-title">Add Activity</h2>
+
+            <button
+                class="close-button"
+                id="closeModalButton"
+                type="button"
+                aria-label="Close dialog">
+                ×
+            </button>
+        </header>
+
+        <form id="activityForm">
+
+            <fieldset>
+                <legend>Activity information</legend>
+
+                <div class="form-group">
+                    <label for="activityName">
+                        Activity name
+                    </label>
+
+                    <input
+                        id="activityName"
+                        name="activityName"
+                        type="text"
+                        required
+                        minlength="3"
+                        autocomplete="off"
+                        aria-describedby="activityNameHelp">
+
+                    <p id="activityNameHelp" class="help-text">
+                        Enter at least 3 characters.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="activityType">
+                        Activity type
+                    </label>
+
+                    <select
+                        id="activityType"
+                        name="activityType"
+                        required>
+                        <option value="">Select a type</option>
+                        <option value="project">Project</option>
+                        <option value="report">Report</option>
+                        <option value="user">User management</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="activityDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="activityDescription"
+                        name="activityDescription"
+                        rows="4"
+                        maxlength="500"></textarea>
+                </div>
+
+            </fieldset>
+
+            <div class="form-actions">
+                <button
+                    class="secondary-button"
+                    type="button"
+                    id="cancelModalButton">
+                    Cancel
+                </button>
+
+                <button
+                    class="primary-button"
+                    type="submit">
+                    Save activity
+                </button>
+            </div>
+
+        </form>
+    </div>
+</dialog>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

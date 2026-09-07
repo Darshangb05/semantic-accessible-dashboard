@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Enterprise dashboard reports">
+
+    <title>Enterprise Dashboard | Reports</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">
+    Skip to main content
+</a>
+
+<header class="site-header">
+
+    <div class="header-brand">
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-controls="sidebar"
+            aria-expanded="false">
+
+            <span aria-hidden="true">☰</span>
+
+            <span class="sr-only">
+                Toggle navigation menu
+            </span>
+
+        </button>
+
+        <a class="brand-link" href="index.html">
+            Enterprise Dashboard
+        </a>
+
+    </div>
+
+    <nav class="top-navigation" aria-label="Primary navigation">
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="users.html">
+                    Users
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html" aria-current="page">
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <button
+            class="notification-button"
+            type="button"
+            aria-label="Notifications">
+            🔔
+        </button>
+
+        <span class="user-name">
+            Admin User
+        </span>
+
+    </div>
+
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+
+        <nav aria-label="Sidebar navigation">
+
+            <h2 class="sidebar-title">
+                Menu
+            </h2>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <a href="index.html">
+                        <span aria-hidden="true">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="users.html">
+                        <span aria-hidden="true">👥</span>
+                        Users
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html" aria-current="page">
+                        <span aria-hidden="true">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a href="settings.html">
+                        <span aria-hidden="true">⚙</span>
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main id="main-content" class="main-content">
+
+        <section
+            class="page-heading"
+            aria-labelledby="page-title">
+
+            <div>
+
+                <p class="breadcrumb">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <span aria-hidden="true">
+                        /
+                    </span>
+
+                    Reports
+
+                </p>
+
+                <h1 id="page-title">
+                    Reports
+                </h1>
+
+                <p>
+                    Generate and review organization reports.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section
+            class="panel"
+            aria-labelledby="report-form-title">
+
+            <header class="panel-header">
+
+                <div>
+
+                    <h2 id="report-form-title">
+                        Generate Report
+                    </h2>
+
+                    <p>
+                        Select the required report parameters.
+                    </p>
+
+                </div>
+
+            </header>
+
+            <form id="reportForm">
+
+                <fieldset>
+
+                    <legend>
+                        Report configuration
+                    </legend>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="reportType">
+                                Report type
+                            </label>
+
+                            <select
+                                id="reportType"
+                                name="reportType"
+                                required>
+
+                                <option value="">
+                                    Select report type
+                                </option>
+
+                                <option value="users">
+                                    User report
+                                </option>
+
+                                <option value="activity">
+                                    Activity report
+                                </option>
+
+                                <option value="projects">
+                                    Project report
+                                </option>
+
+                                <option value="performance">
+                                    Performance report
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="startDate">
+                                Start date
+                            </label>
+
+                            <input
+                                id="startDate"
+                                name="startDate"
+                                type="date"
+                                required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="endDate">
+                                End date
+                            </label>
+
+                            <input
+                                id="endDate"
+                                name="endDate"
+                                type="date"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+
+                    <legend>
+                        Export format
+                    </legend>
+
+                    <div class="radio-group">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="format"
+                                value="pdf"
+                                required>
+                            PDF
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="format"
+                                value="csv">
+                            CSV
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="format"
+                                value="xlsx">
+                            Excel
+                        </label>
+
+                    </div>
+
+                </fieldset>
+
+                <div class="form-actions">
+
+                    <button
+                        class="primary-button"
+                        type="submit">
+                        Generate report
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        type="reset">
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <section
+            class="panel"
+            aria-labelledby="reports-title">
+
+            <header class="panel-header">
+
+                <div>
+
+                    <h2 id="reports-title">
+                        Recent Reports
+                    </h2>
+
+                    <p>
+                        Previously generated reports.
+                    </p>
+
+                </div>
+
+            </header>
+
+            <div class="table-container">
+
+                <table>
+
+                    <caption class="sr-only">
+                        Recently generated reports
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">
+                                Report
+                            </th>
+
+                            <th scope="col">
+                                Generated by
+                            </th>
+
+                            <th scope="col">
+                                Date
+                            </th>
+
+                            <th scope="col">
+                                Format
+                            </th>
+
+                            <th scope="col">
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Monthly User Report
+                            </td>
+
+                            <td>
+                                Admin User
+                            </td>
+
+                            <td>
+                                07 Sep 2026
+                            </td>
+
+                            <td>
+                                PDF
+                            </td>
+
+                            <td>
+                                <span class="status status-success">
+                                    Ready
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                Activity Report
+                            </td>
+
+                            <td>
+                                Priya Kumar
+                            </td>
+
+                            <td>
+                                05 Sep 2026
+                            </td>
+
+                            <td>
+                                CSV
+                            </td>
+
+                            <td>
+                                <span class="status status-success">
+                                    Ready
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<footer class="site-footer">
+
+    <p>
+        &copy; 2026 Enterprise Dashboard.
+    </p>
+
+    <nav aria-label="Footer navigation">
+
+        <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+
+    </nav>
+
+</footer>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
+
