@@ -1,332 +1,311 @@
-```javascript
-"use strict";
+import {
+    fetchProducts,
+    fetchCategories
+} from "./api.js";
 
-/*
- * Accessible Enterprise Dashboard
- *
- * Features:
- * - Mobile navigation
- * - Accessible modal dialogs
- * - Form validation
- * - User search
- * - Keyboard-friendly interactions
- */
+import {
+    savePreferences,
+    getPreferences
+} from "./storage.js";
 
-/* =========================================
-   MOBILE SIDEBAR
-========================================= */
+let products = [];
+let filteredProducts = [];
 
-const menuButton = document.getElementById("menuButton");
-const sidebar = document.getElementById("sidebar");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+const categoryTabs = document.querySelector("#category-tabs");
+const productContainer = document.querySelector("#product-container");
+const loadingSkeleton = document.querySelector("#loading-skeleton");
+const errorMessage = document.querySelector("#error-message");
 
-if (menuButton && sidebar) {
-    menuButton.addEventListener("click", function () {
+async function initializeApp() {
+    showLoading();
 
-        const isOpen = sidebar.classList.toggle("is-open");
+    try {
+        products = await fetchProducts();
 
-        menuButton.setAttribute(
-            "aria-expanded",
-            String(isOpen)
+        const categories = await fetchCategories();
+
+        renderCategoryTabs(categories);
+
+        restorePreferences();
+        applyFilters();
+
+    } catch (error) {
+        console.error(error);
+
+        showError(
+            "Unable to load products. Please check your connection and try again."
         );
-
-    });
-}
-
-/* =========================================
-   ACTIVITY MODAL
-========================================= */
-
-const activityModal = document.getElementById("activityModal");
-const openModalButton = document.getElementById("openModalButton");
-const closeModalButton = document.getElementById("closeModalButton");
-const cancelModalButton = document.getElementById("cancelModalButton");
-const activityForm = document.getElementById("activityForm");
-
-function closeDialog(dialog) {
-    if (dialog && dialog.open) {
-        dialog.close();
+    } finally {
+        hideLoading();
     }
 }
 
-if (openModalButton && activityModal) {
+/* =========================
+   CATEGORY TABS
+========================= */
 
-    openModalButton.addEventListener("click", function () {
+function renderCategoryTabs(categories) {
+    categoryTabs.innerHTML = "";
 
-        activityModal.showModal();
+    const allButton = createCategoryButton("all", "All");
+    categoryTabs.appendChild(allButton);
 
-        const activityName =
-            document.getElementById("activityName");
+    categories.forEach(category => {
 
-        if (activityName) {
-            activityName.focus();
-        }
+        const label = category
+            .split(" ")
+            .map(word =>
+                word.charAt(0).toUpperCase() + word.slice(1)
+            )
+            .join(" ");
 
-    });
-}
-
-if (closeModalButton) {
-
-    closeModalButton.addEventListener("click", function () {
-        closeDialog(activityModal);
-    });
-
-}
-
-if (cancelModalButton) {
-
-    cancelModalButton.addEventListener("click", function () {
-        closeDialog(activityModal);
+        categoryTabs.appendChild(
+            createCategoryButton(category, label)
+        );
     });
 
+    setActiveCategory("all");
 }
 
-if (activityForm) {
+function createCategoryButton(value, label) {
 
-    activityForm.addEventListener("submit", function (event) {
+    const button = document.createElement("button");
 
-        event.preventDefault();
+    button.type = "button";
+    button.className = "category-tab";
+    button.dataset.category = value;
+    button.textContent = label;
 
-        if (!activityForm.checkValidity()) {
+    button.setAttribute("aria-pressed", "false");
 
-            activityForm.reportValidity();
+    button.addEventListener("click", () => {
 
-            return;
-        }
-
-        alert("Activity created successfully.");
-
-        activityForm.reset();
-
-        closeDialog(activityModal);
+        setActiveCategory(value);
+        applyFilters();
 
     });
 
+    return button;
 }
 
-/* =========================================
-   USER MODAL
-========================================= */
+function setActiveCategory(category) {
 
-const userModal = document.getElementById("userModal");
-const openUserModal = document.getElementById("openUserModal");
-const closeUserModal = document.getElementById("closeUserModal");
-const cancelUserModal = document.getElementById("cancelUserModal");
-const userForm = document.getElementById("userForm");
-const quickAddUser = document.getElementById("quickAddUser");
+    categoryTabs
+        .querySelectorAll(".category-tab")
+        .forEach(button => {
 
-function openUserDialog() {
+            const active =
+                button.dataset.category === category;
 
-    if (!userModal) {
+            button.classList.toggle("active", active);
+
+            button.setAttribute(
+                "aria-pressed",
+                String(active)
+            );
+
+        });
+}
+
+/* =========================
+   FILTER + SEARCH
+========================= */
+
+function applyFilters() {
+
+    const searchTerm =
+        searchInput.value.trim().toLowerCase();
+
+    const activeButton =
+        categoryTabs.querySelector(".category-tab.active");
+
+    const selectedCategory =
+        activeButton?.dataset.category || "all";
+
+    const selectedSort =
+        sortSelect.value;
+
+    filteredProducts = products.filter(product => {
+
+        const matchesSearch =
+            product.title
+                .toLowerCase()
+                .includes(searchTerm);
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            product.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    sortProducts(selectedSort);
+
+    renderProducts();
+
+    savePreferences({
+        search: searchTerm,
+        category: selectedCategory,
+        sort: selectedSort
+    });
+}
+
+/* =========================
+   SORTING
+========================= */
+
+function sortProducts(sortType) {
+
+    if (sortType === "price-low") {
+
+        filteredProducts.sort(
+            (a, b) => a.price - b.price
+        );
+
+    }
+
+    if (sortType === "price-high") {
+
+        filteredProducts.sort(
+            (a, b) => b.price - a.price
+        );
+
+    }
+
+    if (sortType === "name") {
+
+        filteredProducts.sort(
+            (a, b) =>
+                a.title.localeCompare(b.title)
+        );
+
+    }
+}
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts() {
+
+    productContainer.innerHTML = "";
+
+    if (filteredProducts.length === 0) {
+
+        productContainer.innerHTML = `
+            <p class="no-results">
+                No products found.
+            </p>
+        `;
+
         return;
     }
 
-    userModal.showModal();
+    filteredProducts.forEach(product => {
 
-    const fullName =
-        document.getElementById("fullName");
+        const card =
+            document.createElement("article");
 
-    if (fullName) {
-        fullName.focus();
-    }
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <img
+                src="${product.image}"
+                alt="${product.title}"
+                loading="lazy"
+            >
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    ${product.category}
+                </span>
+
+                <h3>${product.title}</h3>
+
+                <p class="product-price">
+                    $${product.price.toFixed(2)}
+                </p>
+
+                <p class="product-rating">
+                    ⭐ ${product.rating.rate}
+                </p>
+
+            </div>
+        `;
+
+        productContainer.appendChild(card);
+
+    });
 }
 
-if (openUserModal) {
+/* =========================
+   LOCAL STORAGE
+========================= */
 
-    openUserModal.addEventListener(
-        "click",
-        openUserDialog
+function restorePreferences() {
+
+    const preferences =
+        getPreferences();
+
+    searchInput.value =
+        preferences.search || "";
+
+    sortSelect.value =
+        preferences.sort || "default";
+
+    setActiveCategory(
+        preferences.category || "all"
     );
+}
+
+/* =========================
+   LOADING SKELETON
+========================= */
+
+function showLoading() {
+
+    loadingSkeleton.hidden = false;
+    productContainer.hidden = true;
 
 }
 
-if (quickAddUser) {
+function hideLoading() {
 
-    quickAddUser.addEventListener(
-        "click",
-        openUserDialog
-    );
+    loadingSkeleton.hidden = true;
+    productContainer.hidden = false;
 
 }
 
-if (closeUserModal) {
+/* =========================
+   ERROR MESSAGE
+========================= */
 
-    closeUserModal.addEventListener(
-        "click",
-        function () {
-            closeDialog(userModal);
-        }
-    );
+function showError(message) {
 
-}
-
-if (cancelUserModal) {
-
-    cancelUserModal.addEventListener(
-        "click",
-        function () {
-            closeDialog(userModal);
-        }
-    );
+    errorMessage.textContent = message;
+    errorMessage.hidden = false;
 
 }
 
-if (userForm) {
+/* =========================
+   EVENTS
+========================= */
 
-    userForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            if (!userForm.checkValidity()) {
-
-                userForm.reportValidity();
-
-                return;
-            }
-
-            alert("User created successfully.");
-
-            userForm.reset();
-
-            closeDialog(userModal);
-
-        }
-    );
-
-}
-
-/* =========================================
-   USER SEARCH
-========================================= */
-
-const userSearch = document.getElementById("userSearch");
-const usersTable = document.getElementById("usersTable");
-
-if (userSearch && usersTable) {
-
-    userSearch.addEventListener(
-        "input",
-        function () {
-
-            const searchTerm =
-                userSearch.value
-                    .toLowerCase()
-                    .trim();
-
-            const rows =
-                usersTable.querySelectorAll(
-                    "tbody tr"
-                );
-
-            rows.forEach(function (row) {
-
-                const rowText =
-                    row.textContent
-                        .toLowerCase();
-
-                const matches =
-                    rowText.includes(searchTerm);
-
-                row.hidden = !matches;
-
-            });
-
-        }
-    );
-
-}
-
-/* =========================================
-   REPORT FORM
-========================================= */
-
-const reportForm =
-    document.getElementById("reportForm");
-
-if (reportForm) {
-
-    reportForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            if (!reportForm.checkValidity()) {
-
-                reportForm.reportValidity();
-
-                return;
-            }
-
-            alert(
-                "Your report has been queued successfully."
-            );
-
-            reportForm.reset();
-
-        }
-    );
-
-}
-
-/* =========================================
-   PROFILE FORM
-========================================= */
-
-const profileForm =
-    document.getElementById("profileForm");
-
-if (profileForm) {
-
-    profileForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            if (!profileForm.checkValidity()) {
-
-                profileForm.reportValidity();
-
-                return;
-            }
-
-            alert(
-                "Your profile settings have been saved."
-            );
-
-        }
-    );
-
-}
-
-/* =========================================
-   ESCAPE KEY SUPPORT
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        if (
-            activityModal &&
-            activityModal.open
-        ) {
-            activityModal.close();
-        }
-
-        if (
-            userModal &&
-            userModal.open
-        ) {
-            userModal.close();
-        }
-
-    }
+searchInput.addEventListener(
+    "input",
+    applyFilters
 );
-```
+
+sortSelect.addEventListener(
+    "change",
+    applyFilters
+);
+
+/* =========================
+   START APPLICATION
+========================= */
+
+initializeApp();
