@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shopping Cart | Accessible Store</title>
+
+    <link
+        rel="stylesheet"
+        href="css/styles.css"
+    >
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="header-brand">
+
+        <a
+            href="index.html"
+            class="brand-link"
+        >
+            Accessible Store
+        </a>
+
+    </div>
+
+    <nav
+        class="top-navigation"
+        aria-label="Main navigation"
+    >
+
+        <ul>
+
+            <li>
+                <a href="products.html">
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="cart.html"
+                    aria-current="page"
+                >
+                    Cart
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<main class="main-content">
+
+<section
+    class="panel"
+    aria-labelledby="cart-title"
+>
+
+    <h1 id="cart-title">
+        Shopping Cart
+    </h1>
+
+    <div
+        id="cart-container"
+        aria-live="polite"
+    ></div>
+
+</section>
+
+</main>
+
+<script
+    type="module"
+    src="js/cart.js"
+></script>
+
+</body>
+</html>
