@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+    <meta
+        name="description"
+        content="Accessible government service directory starter application."
+    >
+    <title>Accessible Service Directory</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <header class="site-header">
+        <div class="container">
+            <a class="brand" href="./">
+                Service Directory
+            </a>
+
+            <nav aria-label="Primary navigation">
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" aria-labelledby="page-title">
+            <div class="container">
+                <p class="eyebrow">Accessibility-first foundation</p>
+                <h1 id="page-title">
+                    Government Service Directory
+                </h1>
+                <p>
+                    A setup-ready vertical slice built with semantic HTML,
+                    keyboard-friendly controls and a small HTTP API.
+                </p>
+            </div>
+        </section>
+
+        <section
+            id="services"
+            class="services-section"
+            aria-labelledby="services-title"
+        >
+            <div class="container">
+                <div class="section-heading">
+                    <h2 id="services-title">Services</h2>
+                    <p>
+                        Search the available service directory.
+                    </p>
+                </div>
+
+                <form
+                    id="search-form"
+                    class="search-form"
+                    role="search"
+                >
+                    <label for="service-search">
+                        Search services
+                    </label>
+
+                    <div class="search-row">
+                        <input
+                            id="service-search"
+                            name="q"
+                            type="search"
+                            autocomplete="off"
+                            placeholder="Search by service or department"
+                        >
+
+                        <button type="submit">
+                            Search
+                        </button>
+
+                        <button
+                            id="clear-search"
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                </form>
+
+                <p
+                    id="status-message"
+                    class="status"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Loading services…
+                </p>
+
+                <div
+                    id="service-list"
+                    class="service-grid"
+                    aria-live="polite"
+                ></div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About this foundation</h2>
+                <p>
+                    The client is separated from the server so the project
+                    can grow into a maintainable full-stack application.
+                </p>
+
+                <noscript>
+                    JavaScript is required for the interactive service
+                    directory. The page structure remains available without
+                    scripting.
+                </noscript>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                Accessibility Baseline & Repository Architecture Audit
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

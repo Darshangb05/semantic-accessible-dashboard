@@ -1,0 +1,249 @@
+/* Accessibility-first baseline */
+
+:root {
+    --color-bg: #f6f8fb;
+    --color-surface: #ffffff;
+    --color-text: #172033;
+    --color-muted: #4b5565;
+    --color-primary: #174ea6;
+    --color-primary-hover: #123c83;
+    --color-border: #c8d0dc;
+    --color-focus: #ffbf00;
+    --max-width: 1120px;
+    --radius: 0.75rem;
+    --shadow: 0 8px 24px rgba(20, 35, 60, 0.08);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--color-primary);
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background: #111827;
+    color: #ffffff;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.container {
+    width: min(
+        calc(100% - 2rem),
+        var(--max-width)
+    );
+    margin-inline: auto;
+}
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-header .container {
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand {
+    font-weight: 800;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero {
+    padding-block: 4rem;
+    background: #eaf1ff;
+}
+
+.hero h1 {
+    max-width: 720px;
+    margin-block: 0.25rem 1rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+}
+
+.hero p {
+    max-width: 760px;
+}
+
+.eyebrow {
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.services-section,
+.about-section {
+    padding-block: 3rem;
+}
+
+.section-heading {
+    margin-bottom: 1.5rem;
+}
+
+.search-form {
+    padding: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+input[type="search"] {
+    flex: 1 1 18rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: var(--color-text);
+}
+
+button {
+    min-height: 2.75rem;
+    padding: 0.65rem 1rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+button:hover {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+.secondary-button {
+    background: #ffffff;
+    color: var(--color-primary);
+}
+
+.status {
+    min-height: 1.6rem;
+    margin-block: 1.25rem;
+    color: var(--color-muted);
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(15rem, 1fr)
+    );
+    gap: 1rem;
+}
+
+.service-card {
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.service-card h3 {
+    margin-top: 0;
+}
+
+.service-card p {
+    color: var(--color-muted);
+}
+
+.site-footer {
+    padding-block: 2rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+noscript {
+    display: block;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 2px solid #8a4b00;
+    background: #fff4df;
+}
+
+@media (max-width: 600px) {
+    .site-header .container {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-block: 1rem;
+    }
+
+    .search-row > * {
+        width: 100%;
+    }
+}

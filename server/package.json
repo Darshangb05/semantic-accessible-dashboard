@@ -1,0 +1,11 @@
+{
+  "name": "accessibility-baseline-audit-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Setup-ready server for the accessibility audit project.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test ../test/api.test.js"
+  }
+}
